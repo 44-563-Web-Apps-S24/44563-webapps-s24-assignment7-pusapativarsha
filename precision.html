@@ -63,6 +63,12 @@
     }
 
     document.getElementById('startBtn').onclick = startTime;
+    function newGame() {
+        // Reset game state
+        stopTime = undefined;
+        document.getElementById('target').innerHTML = "Your time will appear here";
+        document.getElementById('counter').innerHTML = "Countdown";
+    }
   </script>
 </body>
 </html>
