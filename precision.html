@@ -1,38 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>setTimeout use</title>
+  <title>Speed Check</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    #target {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    #counter {
+      font-size: 36px;
+      margin-top: 20px;
+    }
+
+    #btnContainer {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="mt-5">Varsha Pusapati Speed Check</h1>
+    <div id="target">Your time will appear here</div>
+    <div id="counter">Countdown</div>
+    <div id="btnContainer" class="text-center">
+      <button type="button" id="startBtn" class="btn btn-primary mt-3 mr-3" onclick="startTime()">Start Timer</button>
+      <button type="button" id="stopBtn" class="btn btn-danger mt-3" onclick="recordTime()">Stop Timer</button>
+    </div>
+  </div>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
-<body>
 
-  <h2>Timeout - Red in 3 seconds</h2>
+ <script>
+    let stopTime = undefined;
 
-  <button type="button"
-  class="btn btn-primary"
-  onclick="buttonPress2()">
-  Click me change the color.</button>
-  
-  <p id="target">I will become red </p>
-  
-  <script> 
-  function buttonPress1() {
-    setTimeout(function(){
-      document.getElementById('target').style.color = "red"
-    }, 3000)
-  }
+    function recordTime() {
+        stopTime = Date.now();
+        console.log(stopTime);
+    }
 
-  function buttonPress2() {
-    setTimeout(()=>{
-      document.getElementById('target').style.color = "red"
-    }, 3000)
-  }
+    document.getElementById('stopBtn').onclick = recordTime;
+
+    function startTime() {
+        for (let i = 0; i < 5; i++) {
+            setTimeout(function() {
+                document.getElementById('counter').innerHTML = 4 - i;
+            }, i * 1000);
+        }
+        setTimeout(function() {
+            if (stopTime === undefined) {
+                document.getElementById('target').innerHTML = "Too Slow";
+            } else {
+                let elapsedTime = stopTime - (Date.now() - 5000);
+                document.getElementById('target').innerHTML = "Time was " + elapsedTime + "ms";
+            }
+        }, 5000);
+    }
+
+    document.getElementById('startBtn').onclick = startTime;
   </script>
-
 </body>
 </html>
